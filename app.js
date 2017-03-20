@@ -121,7 +121,7 @@ function compareNumbers() {
       }
       resetButton.classList.add("ready")
       focusElement(resetButton);
-      console.log("SUCCESS!");
+      console.log("SUCCESS!!!");
     }
     console.log("Guessed Number = " + guessedNumber);
     console.log("Random Number = " + randomNumber);
