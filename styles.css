@@ -42,6 +42,8 @@ main {
     main .inputs .minmax {
       display: flex;
       justify-content: space-between; }
+      main .inputs .minmax input.attention {
+        animation: pulse-input 1s ease-in-out 3; }
       main .inputs .minmax label {
         position: absolute;
         top: 36px;
@@ -163,5 +165,12 @@ main {
     color: #EB008B; }
   100% {
     color: #000; } }
+@keyframes pulse-input {
+  0% {
+    box-shadow: 0px 0px 10px transparent; }
+  50% {
+    box-shadow: 0px 0px 10px #EB008B; }
+  100% {
+    box-shadow: 0px 0px 10px transparent; } }
 
 /*# sourceMappingURL=styles.css.map */

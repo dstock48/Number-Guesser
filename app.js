@@ -19,26 +19,42 @@ resetGame();
 
 minNumberInput.addEventListener("input", function(e) {
   var input = parseInt(e.target.value)
-  console.log();
-  if (isNaN(input)) {
-    minNumber = "?";
-    updateMessageBefore()
+  if (input > maxNumber || maxNumber < input) {
+    updateErrorMessage("Minimum cannot be greater than Maximum");
+    disableGuessButton();
+    minNumber = "!!";
   } else {
-  minNumber = input;
-  resetGame();
+    updateErrorMessage("");
+    if (isNaN(input)) {
+      minNumber = "??";
+      disableGuessButton();
+    } else {
+      minNumber = input;
+      getRandomNumber();
+      console.log("Random Number = " + randomNumber);
+    }
   }
+  updateMessageBefore();
 });
 
 maxNumberInput.addEventListener("input", function(e) {
   var input = parseInt(e.target.value)
-  console.log();
-  if (isNaN(input)) {
-    maxNumber = "?";
-    updateMessageBefore()
+  if (minNumber > input || input < minNumber) {
+    updateErrorMessage("Maximum cannot be less than Minimum");
+    disableGuessButton();
+    maxNumber = "!!";
   } else {
-  maxNumber = input;
-  resetGame();
+    updateErrorMessage("");
+    if (isNaN(input)) {
+      maxNumber = "??";
+      disableGuessButton();
+    } else {
+    maxNumber = input;
+    getRandomNumber();
+    console.log("Random Number = " + randomNumber);
+    }
   }
+  updateMessageBefore();
 });
 
 guessInput.addEventListener("input", function(e) {
@@ -48,6 +64,9 @@ guessInput.addEventListener("input", function(e) {
     disableClearButton();
     disableGuessButton();
     updateErrorMessage("");
+  } else if (isNaN(minNumber) || isNaN(maxNumber)) {
+    disableClearButton();
+    disableGuessButton();
   } else if (isNaN(input) || input > maxNumber || input < minNumber) {
     enableClearButton();
     disableGuessButton();
@@ -122,6 +141,31 @@ function updateNumberDisplay() {
   guessedNumberDisplay.textContent = guessInput.value;
 }
 
+function updateMessageBefore(message) {
+  messageBefore.textContent = message || "Pick a number from " + minNumber + " to " + maxNumber;
+}
+
+function updateMessageAfter(message) {
+  if (message === "clear") {
+    messageAfter.innerHTML = "&nbsp";
+  } else {
+    messageAfter.textContent = message;
+  }
+}
+
+function updateMinMaxInputs() {
+  minNumberInput.value = minNumber;
+  maxNumberInput.value = maxNumber;
+}
+
+function updateGuessedNumberDisplay(char) {
+  guessedNumberDisplay.textContent = char;
+}
+
+function updateErrorMessage(message) {
+  errorMessage.textContent = message;
+}
+
 function compareNumbers() {
   guessedNumber = parseInt(guessInput.value);
   if (guessButton.classList.value !== "disabled" ) {
@@ -162,7 +206,8 @@ function compareNumbers() {
       minNumber -= 10;
       gamesCompleted++;
       console.log("SUCCESS!!!");
-      messageBefore.classList.remove("attention");
+      minNumberInput.classList.remove("attention");
+      maxNumberInput.classList.remove("attention");
     }
     console.log("Guessed Number = " + guessedNumber);
     console.log("Random Number = " + randomNumber);
@@ -175,52 +220,25 @@ function compareNumbers() {
   }
 }
 
-function updateMessageBefore(message) {
-  messageBefore.textContent = message || "Pick a number from " + minNumber + " to " + maxNumber;
-}
-
-function updateMessageAfter(message) {
-  if (message === "clear") {
-    messageAfter.innerHTML = "&nbsp";
-  } else {
-    messageAfter.textContent = message;
-  }
-}
-
-function updateMinMaxInputs() {
-  minNumberInput.value = minNumber;
-  maxNumberInput.value = maxNumber;
-}
-
-function updateGuessedNumberDisplay(char) {
-  guessedNumberDisplay.textContent = char;
-}
-
-function updateErrorMessage(message) {
-  errorMessage.textContent = message;
-}
-
 function resetGame() {
-  if (minNumber > maxNumber || maxNumber < minNumber) {
-    updateErrorMessage("Minimum cannot be greater than maximum");
-  } else {
-    console.log("======= RESET GAME =======");
-    messageBefore.classList.add("attention");
-    guessCount = 0;
-    getRandomNumber();
-    disableResetButton()
-    updateMessageBefore()
-    updateGuessedNumberDisplay("#");
-    updateMessageAfter("clear")
-    errorMessage.textContent = "";
-    guessedNumberDisplay.classList.remove("success");
-    guessInput.removeAttribute("disabled", "");
-    resetButton.classList.remove("play-again");
-    resetButton.textContent = "Reset";
-    updateMinMaxInputs();
-    console.log("Random Number = " + randomNumber);
-    console.log("Guess Count = " + guessCount);
-    clearInput();
-    // focusElement(guessInput);
+  console.log("======= RESET GAME =======");
+  if (gamesCompleted > 0) {
+    minNumberInput.classList.add("attention");
+    maxNumberInput.classList.add("attention");
   }
+  guessCount = 0;
+  getRandomNumber();
+  disableResetButton()
+  updateMessageBefore()
+  updateGuessedNumberDisplay("#");
+  updateMessageAfter("clear")
+  errorMessage.textContent = "";
+  guessedNumberDisplay.classList.remove("success");
+  guessInput.removeAttribute("disabled", "");
+  resetButton.classList.remove("play-again");
+  resetButton.textContent = "Reset";
+  updateMinMaxInputs();
+  console.log("Random Number = " + randomNumber);
+  console.log("Guess Count = " + guessCount);
+  clearInput();
 }
