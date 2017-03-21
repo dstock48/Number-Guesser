@@ -41,6 +41,7 @@ main {
   font-weight: 300;
 
   .inputs {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -48,6 +49,32 @@ main {
     .minmax {
       display: flex;
       justify-content: space-between;
+
+      label {
+        position: absolute;
+        top: 36px;
+        color: #ED458B;
+        font-size: 1.2em;
+        letter-spacing: 2px;
+      }
+    }
+
+    .minmax-input-container {
+      position: relative;
+      width: 45%;
+    }
+
+    #error-message {
+      text-align: center;
+      color: #ED458B;
+      position: absolute;
+      margin: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 142px;
+      font-size: 1.2em;
+      font-weight: bold;
+      width: 100%;
     }
 
     input {
@@ -63,19 +90,21 @@ main {
       line-height: 1.5;
       transition: all 200ms;
 
-      &#minNumber,
-      &#maxNumber {
-        width: 40%;
+      &#min-number,
+      &#max-number {
+        // width: 45%;
+
       }
 
       &::placeholder {
         color: #D0D2D3;
       }
+
       &[type="number"]::-webkit-outer-spin-button,
       &[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
-        }
+      }
 
       &[type="number"] {
         -moz-appearance: textfield;
@@ -85,15 +114,6 @@ main {
         outline: none;
         border: 3px solid #ED458B;
         color: #404041;
-      }
-
-      &.error {
-        color: white;
-        background-color: #f00;
-        border-color: #f00;
-        &:focus {
-          border-color: #a00;
-        }
       }
     }
   }
@@ -119,38 +139,44 @@ main {
     border: 3px solid transparent;
     transition: all 200ms;
 
-
     &:hover {
       background-color: #EB008B;
       cursor: pointer;
       outline: none;
     }
 
-    &:focus, {
+    &:focus {
       outline: none;
+
       // border: 3px solid #EB008B;
+
     }
 
     &:active {
       transform: translateY(2px);
     }
 
-    &.ready {
+    &.play-again {
       animation: pulse 1.5s infinite;
       animation-fill-mode: backwards;
+
       // animation-iteration-count: 5;
+
     }
 
     &.disabled {
       background-color: #D0D2D3;
+
       &:hover {
         cursor: not-allowed;
       }
+
       &:active {
         transform: none;
       }
+
       &:focus {
-        background-color: hsla(324,100%,46%,.2);
+        background-color: hsla(324, 100%, 46%, 0.2);
       }
     }
   }
@@ -159,6 +185,10 @@ main {
     width: 100%;
     text-align: center;
     color: #404041;
+
+    #message-before.attention {
+      animation: pulse-text 1s ease-in-out 3;
+    }
 
     #message-after {
       line-height: 1.5;
@@ -187,13 +217,36 @@ main {
   color: #EB008B;
   font-weight: 300;
   font-family: 'Open Sans', sans-serif;
+
   &.success {
     font-weight: bold;
   }
 }
 
 @keyframes pulse {
-  0% {background-color: #929497;}
-  50% {background-color: #EB008B}
-  100% {background-color: #929497;}
+  0% {
+    background-color: #929497;
+  }
+
+  50% {
+    background-color: #EB008B;
+  }
+
+  100% {
+    background-color: #929497;
+  }
+}
+
+@keyframes pulse-text {
+  0% {
+    color: #000;
+  }
+
+  50% {
+    color: #EB008B;
+  }
+
+  100% {
+    color: #000;
+  }
 }

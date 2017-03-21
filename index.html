@@ -13,20 +13,27 @@
     </header>
     <main>
       <div class="inputs">
-        <!-- <div class="minmax">
-          <input id="minNumber" type="number" name="number" value="1" placeholder="Min">
-          <input id="maxNumber" type="number" name="number" value="100" placeholder="Max">
-        </div> -->
-        <input id="guess-input" type="number" name="number" value="" placeholder="Enter your guess">
+        <div class="minmax">
+          <div class="minmax-input-container">
+            <label for="min-number">Minimum</label>
+            <input id="min-number" type="text" name="number" value="" placeholder="Min">
+          </div>
+          <div class="minmax-input-container">
+            <label for="max-number">Maximum</label>
+            <input id="max-number" type="text" name="number" value="" placeholder="Max">
+          </div>
+        </div>
+        <input id="guess-input" type="text" name="number" value="" placeholder="Enter your guess">
+        <p id="error-message"></p>
       </div>
       <div class="buttons">
         <button class="disabled" type="submit" name="guess" id="guess-btn" disabled>Guess</button>
         <button class="disabled" type="button" name="clear" id="clear-btn" disabled>Clear</button>
       </div>
     <section class="result">
-      <p id="message-before">&nbsp</p>
+      <p id="message-before"></p>
       <p id="guessed-number"></p>
-      <p id="message-after">&nbsp</p>
+      <p id="message-after"></p>
       <button type="button" name="clear" id="reset-btn">Reset</button>
     </section>
 

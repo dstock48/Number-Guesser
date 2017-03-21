@@ -6,32 +6,56 @@ var randomNumber,
     messageAfter = document.querySelector("#message-after"),
     guessInput = document.querySelector("#guess-input"),
     guessedNumberDisplay = document.querySelector("#guessed-number"),
-    minNumber = 1,
+    errorMessage = document.querySelector("#error-message"),
+    minNumberInput = document.querySelector("#min-number"),
+    maxNumberInput = document.querySelector("#max-number"),
+    minNumber = 0,
     maxNumber = 100,
     guessedNumber,
-    guessCount = 0;
+    guessCount = 0,
+    gamesCompleted = 0;
 
-startGame();
+resetGame();
 
-
-
-guessInput.addEventListener("input", function(e) { // Validate Input
-  var input = e.target;
-  // console.log(e);
-  console.log("input value = " + input.value);
-  console.log("input valueAsNumber = " + input.valueAsNumber);
-  if (e.inputType === "deleteContentBackward" && input.value === "") {
-    disableButtons();
-    guessInput.classList.remove('error');
-  } else if (input.valueAsNumber > maxNumber || input.valueAsNumber < minNumber) {
-    enableButtons();
-    guessButton.classList.add('disabled');
-    guessButton.setAttribute("disabled", "");
-    guessInput.classList.add('error');
-    clearButton.classList.remove('disabled');
+minNumberInput.addEventListener("input", function(e) {
+  var input = parseInt(e.target.value)
+  console.log();
+  if (isNaN(input)) {
+    minNumber = "?";
+    updateMessageBefore()
   } else {
-    enableButtons();
-    guessInput.classList.remove('error');
+  minNumber = input;
+  resetGame();
+  }
+});
+
+maxNumberInput.addEventListener("input", function(e) {
+  var input = parseInt(e.target.value)
+  console.log();
+  if (isNaN(input)) {
+    maxNumber = "?";
+    updateMessageBefore()
+  } else {
+  maxNumber = input;
+  resetGame();
+  }
+});
+
+guessInput.addEventListener("input", function(e) {
+  var inputString = e.target.value;
+  var input = parseInt(e.target.value);
+  if (e.inputType === "deleteContentBackward" && inputString === "") {
+    disableClearButton();
+    disableGuessButton();
+    updateErrorMessage("");
+  } else if (isNaN(input) || input > maxNumber || input < minNumber) {
+    enableClearButton();
+    disableGuessButton();
+    updateErrorMessage("Warning: Invalid Input. Pick a number from " + minNumber + " to " + maxNumber +".");
+  } else {
+    enableClearButton();
+    enableGuessButton();
+    updateErrorMessage("");
   }
 });
 
@@ -41,7 +65,6 @@ guessInput.addEventListener("keyup", function(e) {
     } else if (e.which === 27) {
       clearInput();
     }
-
 });
 
 guessButton.addEventListener("click", compareNumbers);
@@ -55,108 +78,149 @@ function getRandomNumber() {
 }
 
 function clearInput() {
-  if (guessInput.value !== "") {
     guessInput.value = "";
-    disableButtons();
-    guessInput.classList.remove('error');
+    disableClearButton();
+    disableGuessButton();
+    updateErrorMessage("");
     focusElement(guessInput);
     console.log("========== ALL CLEAR! ==========");
-
-  }
 }
 
 function focusElement(el) {
   el.focus();
 }
 
-function disableButtons() {
-  guessButton.classList.add('disabled');
-  guessButton.setAttribute("disabled", "");
-  clearButton.classList.add('disabled');
-  clearButton.setAttribute("disabled", "");
-}
-
-function enableButtons() {
-  guessButton.classList.remove('disabled');
-  guessButton.removeAttribute("disabled", "");
+//Enable Buttons
+function enableClearButton() {
   clearButton.classList.remove('disabled');
   clearButton.removeAttribute("disabled", "");
 }
+function enableGuessButton() {
+  guessButton.classList.remove('disabled');
+  guessButton.removeAttribute("disabled", "");
+}
+function enableResetButton() {
+  resetButton.classList.remove('disabled');
+  resetButton.removeAttribute("disabled", "");
+}
+
+// Disable Buttons
+function disableClearButton() {
+  clearButton.classList.add('disabled');
+  clearButton.setAttribute("disabled", "");
+}
+function disableGuessButton() {
+  guessButton.classList.add('disabled');
+  guessButton.setAttribute("disabled", "");
+}
+function disableResetButton() {
+  resetButton.classList.add('disabled')
+  resetButton.setAttribute("disabled", "");
+}
 
 function updateNumberDisplay() {
-  guessedNumberDisplay.textContent = guessInput.valueAsNumber;
+  guessedNumberDisplay.textContent = guessInput.value;
 }
 
 function compareNumbers() {
-  guessedNumber = guessInput.valueAsNumber;
+  guessedNumber = parseInt(guessInput.value);
   if (guessButton.classList.value !== "disabled" ) {
     console.log("======= GUESS SUBMISSION =======");
     guessCount++;
-    messageBefore.textContent = "Your last guess was"
+    updateMessageBefore("Your last guess of");
     if (guessedNumber > randomNumber) {
       updateNumberDisplay()
       if (guessedNumber < randomNumber + 10) {
-        messageAfter.textContent = "Too high, but getting warm! Try again."
+        updateMessageAfter("was too high, but you're getting warm! Try again.");
       } else {
-        messageAfter.textContent = "That's too high. Try again."
+        updateMessageAfter("was too high. Try again.");
       }
       focusElement(guessInput);
     } else if (guessedNumber < randomNumber) {
       updateNumberDisplay()
       if (guessedNumber > randomNumber - 10) {
-        messageAfter.textContent = "Too low, but getting warm! Try again."
+        updateMessageAfter("was too low, but you're getting warm! Try again.");
       } else {
-        messageAfter.textContent = "That's too low. Try again."
+        updateMessageAfter("was too low. Try again.");
       }
       focusElement(guessInput);
     } else if (guessedNumber === randomNumber) {
       updateNumberDisplay()
-      guessedNumberDisplay.classList.add("success")
-      guessInput.setAttribute("disabled", "")
+      guessedNumberDisplay.classList.add("success");
+      guessInput.setAttribute("disabled", "");
       resetButton.textContent = "Play Again";
       if (guessCount > 1) {
-        messageAfter.textContent = "BOOM! You got it in " + guessCount + " tries!"
+        updateMessageBefore("Bo0Oo0M!")
+        updateMessageAfter("You got it in " + guessCount + " tries!");
       } else {
-        messageAfter.textContent = "Wow, you got it on your first try! Are you sure you're not cheating?"
+        updateMessageBefore("Wow, you got it on your first try!")
+        updateMessageAfter("Are you sure you're not cheating?");
       }
-      resetButton.classList.add("ready")
       focusElement(resetButton);
+      resetButton.classList.add("play-again");
+      maxNumber += 10;
+      minNumber -= 10;
+      gamesCompleted++;
       console.log("SUCCESS!!!");
+      messageBefore.classList.remove("attention");
     }
     console.log("Guessed Number = " + guessedNumber);
     console.log("Random Number = " + randomNumber);
     console.log("Guess Count = " + guessCount);
-    disableButtons();
-    resetButton.classList.remove('disabled');
-    resetButton.removeAttribute("disabled", "");
+    console.log("Games Completed = " + gamesCompleted);
+    disableClearButton();
+    disableGuessButton();
+    enableResetButton();
     guessInput.value = "";
   }
 }
 
-function startGame() {
-  getRandomNumber();
-  resetGame();
+function updateMessageBefore(message) {
+  messageBefore.textContent = message || "Pick a number from " + minNumber + " to " + maxNumber;
+}
+
+function updateMessageAfter(message) {
+  if (message === "clear") {
+    messageAfter.innerHTML = "&nbsp";
+  } else {
+    messageAfter.textContent = message;
+  }
+}
+
+function updateMinMaxInputs() {
+  minNumberInput.value = minNumber;
+  maxNumberInput.value = maxNumber;
+}
+
+function updateGuessedNumberDisplay(char) {
+  guessedNumberDisplay.textContent = char;
+}
+
+function updateErrorMessage(message) {
+  errorMessage.textContent = message;
 }
 
 function resetGame() {
-  if (guessCount > 0) {
-    getRandomNumber();
-    console.log("============ RESET =============");
+  if (minNumber > maxNumber || maxNumber < minNumber) {
+    updateErrorMessage("Minimum cannot be greater than maximum");
   } else {
-    console.log("=========== NEW GAME ===========");
+    console.log("======= RESET GAME =======");
+    messageBefore.classList.add("attention");
+    guessCount = 0;
+    getRandomNumber();
+    disableResetButton()
+    updateMessageBefore()
+    updateGuessedNumberDisplay("#");
+    updateMessageAfter("clear")
+    errorMessage.textContent = "";
+    guessedNumberDisplay.classList.remove("success");
+    guessInput.removeAttribute("disabled", "");
+    resetButton.classList.remove("play-again");
+    resetButton.textContent = "Reset";
+    updateMinMaxInputs();
+    console.log("Random Number = " + randomNumber);
+    console.log("Guess Count = " + guessCount);
+    clearInput();
+    // focusElement(guessInput);
   }
-  guessCount = 0;
-  resetButton.classList.add('disabled')
-  resetButton.setAttribute("disabled", "");
-  messageBefore.textContent = "Pick a number from";
-  guessedNumberDisplay.textContent = minNumber + "-" + maxNumber;
-  messageAfter.innerHTML = "&nbsp";
-  guessedNumberDisplay.classList.remove("success");
-  guessInput.removeAttribute("disabled", "");
-  resetButton.classList.remove("ready");
-  resetButton.textContent = "Reset";
-  console.log("Random Number = " + randomNumber);
-  console.log("Guess Count = " + guessCount);
-  clearInput();
-  focusElement(guessInput);
 }

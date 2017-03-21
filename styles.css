@@ -35,12 +35,33 @@ main {
   margin: auto;
   font-weight: 300; }
   main .inputs {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%; }
     main .inputs .minmax {
       display: flex;
       justify-content: space-between; }
+      main .inputs .minmax label {
+        position: absolute;
+        top: 36px;
+        color: #ED458B;
+        font-size: 1.2em;
+        letter-spacing: 2px; }
+    main .inputs .minmax-input-container {
+      position: relative;
+      width: 45%; }
+    main .inputs #error-message {
+      text-align: center;
+      color: #ED458B;
+      position: absolute;
+      margin: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 142px;
+      font-size: 1.2em;
+      font-weight: bold;
+      width: 100%; }
     main .inputs input {
       display: block;
       margin: 60px 0 0;
@@ -53,8 +74,6 @@ main {
       font-weight: 300;
       line-height: 1.5;
       transition: all 200ms; }
-      main .inputs input#minNumber, main .inputs input#maxNumber {
-        width: 40%; }
       main .inputs input::placeholder {
         color: #D0D2D3; }
       main .inputs input[type="number"]::-webkit-outer-spin-button, main .inputs input[type="number"]::-webkit-inner-spin-button {
@@ -66,12 +85,6 @@ main {
         outline: none;
         border: 3px solid #ED458B;
         color: #404041; }
-      main .inputs input.error {
-        color: white;
-        background-color: #f00;
-        border-color: #f00; }
-        main .inputs input.error:focus {
-          border-color: #a00; }
   main .buttons {
     display: flex;
     justify-content: space-between;
@@ -98,7 +111,7 @@ main {
       outline: none; }
     main button:active {
       transform: translateY(2px); }
-    main button.ready {
+    main button.play-again {
       animation: pulse 1.5s infinite;
       animation-fill-mode: backwards; }
     main button.disabled {
@@ -113,6 +126,8 @@ main {
     width: 100%;
     text-align: center;
     color: #404041; }
+    main .result #message-before.attention {
+      animation: pulse-text 1s ease-in-out 3; }
     main .result #message-after {
       line-height: 1.5; }
     main .result .error {
@@ -141,5 +156,12 @@ main {
     background-color: #EB008B; }
   100% {
     background-color: #929497; } }
+@keyframes pulse-text {
+  0% {
+    color: #000; }
+  50% {
+    color: #EB008B; }
+  100% {
+    color: #000; } }
 
 /*# sourceMappingURL=styles.css.map */
