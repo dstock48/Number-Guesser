@@ -85,7 +85,7 @@ main {
         -moz-appearance: textfield; }
       main .inputs input:focus {
         outline: none;
-        border: 3px solid #ED458B;
+        border: 3px solid #EB008B;
         color: #404041; }
   main .buttons {
     display: flex;
@@ -122,8 +122,6 @@ main {
         cursor: not-allowed; }
       main button.disabled:active {
         transform: none; }
-      main button.disabled:focus {
-        background-color: rgba(235, 0, 141, 0.2); }
   main .result {
     width: 100%;
     text-align: center;

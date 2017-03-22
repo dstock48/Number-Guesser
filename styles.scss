@@ -187,10 +187,6 @@ main {
       &:active {
         transform: none;
       }
-
-      &:focus {
-        background-color: hsla(324, 100%, 46%, 0.2);
-      }
     }
   }
 
