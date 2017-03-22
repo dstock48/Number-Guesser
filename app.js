@@ -1,19 +1,19 @@
 var randomNumber,
-    clearButton = document.querySelector("#clear-btn"),
-    guessButton = document.querySelector("#guess-btn"),
-    resetButton = document.querySelector("#reset-btn"),
-    messageBefore = document.querySelector("#message-before"),
-    messageAfter = document.querySelector("#message-after"),
-    guessInput = document.querySelector("#guess-input"),
-    guessedNumberDisplay = document.querySelector("#guessed-number"),
-    errorMessage = document.querySelector("#error-message"),
-    minNumberInput = document.querySelector("#min-number"),
-    maxNumberInput = document.querySelector("#max-number"),
-    minNumber = 0,
-    maxNumber = 100,
-    guessedNumber,
-    guessCount = 0,
-    gamesCompleted = 0;
+  clearButton = document.getElementById("clear-btn"),
+  guessButton = document.getElementById("guess-btn"),
+  resetButton = document.getElementById("reset-btn"),
+  messageBefore = document.getElementById("message-before"),
+  messageAfter = document.getElementById("message-after"),
+  guessInput = document.getElementById("guess-input"),
+  guessedNumberDisplay = document.getElementById("guessed-number"),
+  errorMessage = document.getElementById("error-message"),
+  minNumberInput = document.getElementById("min-number"),
+  maxNumberInput = document.getElementById("max-number"),
+  minNumber = 0,
+  maxNumber = 100,
+  guessedNumber,
+  guessCount = 0,
+  gamesCompleted = 0;
 
 resetGame();
 
@@ -21,13 +21,13 @@ minNumberInput.addEventListener("input", function(e) {
   var input = parseInt(e.target.value)
   if (input > maxNumber || maxNumber < input) {
     updateErrorMessage("Minimum cannot be greater than Maximum");
-    disableGuessButton();
+    disableButton(guessButton);
     minNumber = "!!";
   } else {
     updateErrorMessage("");
     if (isNaN(input)) {
       minNumber = "??";
-      disableGuessButton();
+      disableButton(guessButton);
     } else {
       minNumber = input;
       getRandomNumber();
@@ -44,20 +44,20 @@ maxNumberInput.addEventListener("input", function(e) {
   var input = parseInt(e.target.value)
   if (minNumber > input || input < minNumber) {
     updateErrorMessage("Maximum cannot be less than Minimum");
-    disableGuessButton();
+    disableButton(guessButton);
     maxNumber = "!!";
   } else {
     updateErrorMessage("");
     if (isNaN(input)) {
       maxNumber = "??";
-      disableGuessButton();
+      disableButton(guessButton);
     } else {
-    maxNumber = input;
-    getRandomNumber();
-    console.log("----------------");
-    console.log("Random Number = " + randomNumber);
-    console.log("Min = " + minNumber);
-    console.log("Max = " + maxNumber);
+      maxNumber = input;
+      getRandomNumber();
+      console.log("----------------");
+      console.log("Random Number = " + randomNumber);
+      console.log("Min = " + minNumber);
+      console.log("Max = " + maxNumber);
     }
   }
   updateMessageBefore();
@@ -68,29 +68,29 @@ guessInput.addEventListener("input", function(e) {
   var input = parseInt(e.target.value);
   removeAttentionInputs();
   if (e.inputType === "deleteContentBackward" && inputString === "") {
-    disableClearButton();
-    disableGuessButton();
+    disableButton(clearButton);
+    disableButton(guessButton);
     updateErrorMessage("");
   } else if (isNaN(minNumber) || isNaN(maxNumber)) {
-    disableClearButton();
-    disableGuessButton();
+    disableButton(clearButton);
+    disableButton(guessButton);
   } else if (isNaN(input) || input > maxNumber || input < minNumber) {
-    enableClearButton();
-    disableGuessButton();
-    updateErrorMessage("Warning: Invalid Input. Pick a number from " + minNumber + " to " + maxNumber +".");
+    enableButton(clearButton);
+    disableButton(guessButton);
+    updateErrorMessage("Warning: Invalid Input. Pick a number from " + minNumber + " to " + maxNumber + ".");
   } else {
-    enableClearButton();
-    enableGuessButton();
+    enableButton(clearButton);
+    enableButton(guessButton);
     updateErrorMessage("");
   }
 });
 
 guessInput.addEventListener("keyup", function(e) {
-    if (e.which === 13) {
-      compareNumbers();
-    } else if (e.which === 27) {
-      clearInput();
-    }
+  if (e.which === 13) {
+    compareNumbers();
+  } else if (e.which === 27) {
+    clearInput();
+  }
 });
 
 guessButton.addEventListener("click", compareNumbers);
@@ -104,44 +104,26 @@ function getRandomNumber() {
 }
 
 function clearInput() {
-    guessInput.value = "";
-    disableClearButton();
-    disableGuessButton();
-    updateErrorMessage("");
-    focusElement(guessInput);
-    console.log("========== ALL CLEAR! ==========");
+  guessInput.value = "";
+  disableButton(clearButton);
+  disableButton(guessButton);
+  updateErrorMessage("");
+  focusElement(guessInput);
+  console.log("========== ALL CLEAR! ==========");
 }
 
 function focusElement(el) {
   el.focus();
 }
 
-//Enable Buttons
-function enableClearButton() {
-  clearButton.classList.remove('disabled');
-  clearButton.removeAttribute("disabled", "");
-}
-function enableGuessButton() {
-  guessButton.classList.remove('disabled');
-  guessButton.removeAttribute("disabled", "");
-}
-function enableResetButton() {
-  resetButton.classList.remove('disabled');
-  resetButton.removeAttribute("disabled", "");
+function enableButton(button) {
+  button.classList.remove('disabled');
+  button.removeAttribute("disabled", "");
 }
 
-// Disable Buttons
-function disableClearButton() {
-  clearButton.classList.add('disabled');
-  clearButton.setAttribute("disabled", "");
-}
-function disableGuessButton() {
-  guessButton.classList.add('disabled');
-  guessButton.setAttribute("disabled", "");
-}
-function disableResetButton() {
-  resetButton.classList.add('disabled');
-  resetButton.setAttribute("disabled", "");
+function disableButton(button) {
+  button.classList.add('disabled');
+  button.setAttribute("disabled", "");
 }
 
 function updateNumberDisplay() {
@@ -172,8 +154,8 @@ function addAttentionInputs() {
 }
 
 function removeAttentionInputs() {
-minNumberInput.classList.remove("attention");
-maxNumberInput.classList.remove("attention");
+  minNumberInput.classList.remove("attention");
+  maxNumberInput.classList.remove("attention");
 }
 
 function updateGuessedNumberDisplay(char) {
@@ -191,7 +173,7 @@ function makeGameHarder() {
 
 function compareNumbers() {
   guessedNumber = parseInt(guessInput.value);
-  if (guessButton.classList.value !== "disabled" ) {
+  if (guessButton.classList.value !== "disabled") {
     console.log("======= GUESS SUBMISSION =======");
     guessCount++;
     updateMessageBefore("Your last guess of");
@@ -235,9 +217,9 @@ function compareNumbers() {
     console.log("Games Completed = " + gamesCompleted);
     console.log("Min = " + minNumber);
     console.log("Max = " + maxNumber);
-    disableClearButton();
-    disableGuessButton();
-    enableResetButton();
+    disableButton(clearButton);
+    disableButton(guessButton);
+    enableButton(resetButton);
     guessInput.value = "";
   }
 }
@@ -251,7 +233,7 @@ function resetGame() {
     maxNumber = 100;
     updateMinMaxInputs(minNumber, maxNumber);
   }
-  disableResetButton();
+  disableButton(resetButton);
   guessCount = 0;
   getRandomNumber();
   updateMessageBefore();

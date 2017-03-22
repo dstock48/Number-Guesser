@@ -1,3 +1,12 @@
+$header-pink: #ED458B;
+$pink: #EB008B;
+$light-grey: #D0D2D3;
+$mid-grey: #929497;
+$dark-grey: #404041;
+$white: #fff;
+$off-white: #E6E7E8;
+
+
 * {
   box-sizing: border-box;
 }
@@ -9,7 +18,7 @@ body {
 header {
   font-family: 'Open Sans', sans-serif;
   height: 135px;
-  background-color: #404041;
+  background-color: $dark-grey;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,13 +29,13 @@ h1 {
   margin: 0;
   font-size: 4.5em;
   letter-spacing: 1px;
-  color: #E6E7E8;
+  color: $off-white;
   line-height: .8;
   font-weight: 300;
 }
 
 .pink {
-  color: #ED458B;
+  color: $header-pink;
   font-weight: 700;
 }
 
@@ -57,7 +66,7 @@ main {
       label {
         position: absolute;
         top: 36px;
-        color: #ED458B;
+        color: $pink;
         font-size: 1.2em;
         letter-spacing: 2px;
       }
@@ -70,7 +79,7 @@ main {
 
     #error-message {
       text-align: center;
-      color: #ED458B;
+      color: $pink;
       position: absolute;
       margin: 0;
       left: 50%;
@@ -87,8 +96,8 @@ main {
       font-size: 2.2em;
       font-family: 'Open Sans', sans-serif;
       padding: 2px 10px;
-      color: #404041;
-      border: 3px solid #D0D2D3;
+      color: $dark-grey;
+      border: 3px solid $light-grey;
       width: 100%;
       font-weight: 300;
       line-height: 1.5;
@@ -101,7 +110,7 @@ main {
       }
 
       &::placeholder {
-        color: #D0D2D3;
+        color: $light-grey;
       }
 
       &[type="number"]::-webkit-outer-spin-button,
@@ -116,8 +125,8 @@ main {
 
       &:focus {
         outline: none;
-        border: 3px solid #ED458B;
-        color: #404041;
+        border: 3px solid $header-pink;
+        color: $dark-grey;
       }
     }
   }
@@ -135,16 +144,16 @@ main {
     border-radius: 30px;
     width: 45%;
     border: none;
-    color: #fff;
+    color: $white;
     padding: 8px 0px 10px;
     font-size: 2em;
-    background-color: #929497;
+    background-color: $mid-grey;
     font-weight: 300;
     border: 3px solid transparent;
     transition: all 200ms;
 
     &:hover {
-      background-color: #EB008B;
+      background-color: $pink;
       cursor: pointer;
       outline: none;
     }
@@ -152,7 +161,7 @@ main {
     &:focus {
       outline: none;
 
-      // border: 3px solid #EB008B;
+      // border: 3px solid $pink;
 
     }
 
@@ -169,7 +178,7 @@ main {
     }
 
     &.disabled {
-      background-color: #D0D2D3;
+      background-color: $light-grey;
 
       &:hover {
         cursor: not-allowed;
@@ -188,7 +197,7 @@ main {
   .result {
     width: 100%;
     text-align: center;
-    color: #404041;
+    color: $dark-grey;
 
     #message-before.attention {
       animation: pulse-text 1s ease-in-out 3;
@@ -196,10 +205,6 @@ main {
 
     #message-after {
       line-height: 1.5;
-    }
-
-    .error {
-      color: red !important;
     }
 
     p {
@@ -218,7 +223,7 @@ main {
 
 #guessed-number {
   font-size: 15em;
-  color: #EB008B;
+  color: $pink;
   font-weight: 300;
   font-family: 'Open Sans', sans-serif;
 
@@ -229,15 +234,15 @@ main {
 
 @keyframes pulse {
   0% {
-    background-color: #929497;
+    background-color: $mid-grey;
   }
 
   50% {
-    background-color: #EB008B;
+    background-color: $pink;
   }
 
   100% {
-    background-color: #929497;
+    background-color: $mid-grey;
   }
 }
 
@@ -247,7 +252,7 @@ main {
   }
 
   50% {
-    color: #EB008B;
+    color: $pink;
   }
 
   100% {
@@ -258,13 +263,16 @@ main {
 @keyframes pulse-input {
   0% {
     box-shadow: 0px 0px 10px transparent;
+    border-color: $light-grey;
   }
 
   50% {
-    box-shadow: 0px 0px 10px #EB008B;
+    box-shadow: 0px 0px 10px $pink;
+    border-color: $pink;
   }
 
   100% {
     box-shadow: 0px 0px 10px transparent;
+    border-color: $light-grey;
   }
 }
