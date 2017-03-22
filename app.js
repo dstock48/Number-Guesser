@@ -206,10 +206,11 @@ function compareNumbers() {
       }
       focusElement(guessInput);
     } else if (guessedNumber === randomNumber) {
-      updateNumberDisplay();
-      calcGuessAverage(guessCount);
+      console.log("SUCCESS!!!");
       console.log("Guess Count = " + guessCount);
       console.log("Amount of Guesses = " + guessAmounts);
+      updateNumberDisplay();
+      calcGuessAverage(guessCount);
       guessedNumberDisplay.classList.add("success");
       guessInput.setAttribute("disabled", "");
       resetButton.textContent = "Play Again";
@@ -220,7 +221,6 @@ function compareNumbers() {
         updateMessageBefore("Wow, you got it on your first try!");
         updateMessageAfter("Are you sure you're not cheating?");
       }
-      console.log("SUCCESS!!!");
       focusElement(resetButton);
       makeGameHarder();
       resetButton.classList.add("play-again");
