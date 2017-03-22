@@ -13,6 +13,8 @@ var randomNumber,
   maxNumber = 100,
   guessedNumber,
   guessCount = 0,
+  guessAmounts = [],
+  averageGuesses = 0,
   gamesCompleted = 0;
 
 resetGame();
@@ -171,6 +173,16 @@ function makeGameHarder() {
   minNumber -= 10;
 }
 
+function calcGuessAverage(guesses) {
+  guessAmounts.push(guesses)
+  var total = 0;
+  for(var i = 0; i < guessAmounts.length; i++) {
+    total += guessAmounts[i];
+  }
+  averageGuesses = total / guessAmounts.length;
+  console.log("Average Guess Amount = " + averageGuesses);
+}
+
 function compareNumbers() {
   guessedNumber = parseInt(guessInput.value);
   if (guessButton.classList.value !== "disabled") {
@@ -195,12 +207,15 @@ function compareNumbers() {
       focusElement(guessInput);
     } else if (guessedNumber === randomNumber) {
       updateNumberDisplay();
+      calcGuessAverage(guessCount);
+      console.log("Guess Count = " + guessCount);
+      console.log("Amount of Guesses = " + guessAmounts);
       guessedNumberDisplay.classList.add("success");
       guessInput.setAttribute("disabled", "");
       resetButton.textContent = "Play Again";
       if (guessCount > 1) {
-        updateMessageBefore("Bo0Oo0M!");
-        updateMessageAfter("You got it in " + guessCount + " tries!");
+        updateMessageBefore("Bo0Oo0M! You got it in " + guessCount + " tries!");
+        updateMessageAfter("Avg guess amount: " + averageGuesses);
       } else {
         updateMessageBefore("Wow, you got it on your first try!");
         updateMessageAfter("Are you sure you're not cheating?");
