@@ -62,7 +62,7 @@ main {
       margin-bottom: 50px;
 
       input.attention {
-        animation: pulse-input 1s ease-in-out 3;
+        animation: pulse-input 1s ease-in-out 2;
       }
 
       label {
@@ -86,7 +86,7 @@ main {
       margin: 0;
       left: 50%;
       transform: translateX(-50%);
-      top: 142px;
+      top: 45%;
       font-size: 1.2em;
       font-weight: bold;
       width: 100%;
@@ -211,10 +211,14 @@ main {
     }
 
     button {
+      &:first-child {
+        margin-top: 80px;
+      }
+
       display: inline;
       width: 100%;
-      margin-top: 80px;
       font-size: 1.5em;
+      margin-top: 1em;
     }
   }
 }
@@ -283,10 +287,29 @@ main {
   h1 {
     // font-size: 4.3em;
   }
+
+  #guessed-number {
+    font-size: 9em;
+  }
+}
+
+@media (max-width: 800px) {
+  #guessed-number {
+    font-size: 10em;
+  }
 }
 
 @media (max-width: 485px) {
   h1 {
     font-size: 3.6em;
   }
+
+  main .inputs #error-message {
+    font-size: 1em;
+  }
+
+  #guessed-number {
+    font-size: 8em;
+  }
+
 }

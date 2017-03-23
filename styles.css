@@ -45,7 +45,7 @@ main {
       justify-content: space-between;
       margin-bottom: 50px; }
       main .inputs .minmax input.attention {
-        animation: pulse-input 1s ease-in-out 3; }
+        animation: pulse-input 1s ease-in-out 2; }
       main .inputs .minmax label {
         position: absolute;
         top: -38%;
@@ -62,7 +62,7 @@ main {
       margin: 0;
       left: 50%;
       transform: translateX(-50%);
-      top: 142px;
+      top: 45%;
       font-size: 1.2em;
       font-weight: bold;
       width: 100%; }
@@ -137,8 +137,10 @@ main {
     main .result button {
       display: inline;
       width: 100%;
-      margin-top: 80px;
-      font-size: 1.5em; }
+      font-size: 1.5em;
+      margin-top: 1em; }
+      main .result button:first-child {
+        margin-top: 80px; }
 
 #guessed-number {
   font-size: 15em;
@@ -174,9 +176,21 @@ main {
     border-color: #D0D2D3; } }
 @media screen and (max-width: 600px) {
   body {
-    font-size: 0.8em; } }
+    font-size: 0.8em; }
+
+  #guessed-number {
+    font-size: 9em; } }
+@media (max-width: 800px) {
+  #guessed-number {
+    font-size: 10em; } }
 @media (max-width: 485px) {
   h1 {
-    font-size: 3.6em; } }
+    font-size: 3.6em; }
+
+  main .inputs #error-message {
+    font-size: 1em; }
+
+  #guessed-number {
+    font-size: 8em; } }
 
 /*# sourceMappingURL=styles.css.map */
