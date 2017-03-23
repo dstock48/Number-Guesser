@@ -22,9 +22,17 @@ resetGame();
 
 resetButton.addEventListener("click", resetGame);
 
-minNumberInput.addEventListener("focus", resetGame)
+minNumberInput.addEventListener("focus", function() {
+  if (guessCount > 0 || gamesCompleted > 0) {
+    resetGame()
+  }
+});
 
-maxNumberInput.addEventListener("focus", resetGame)
+maxNumberInput.addEventListener("focus", function() {
+  if (guessCount > 0 || gamesCompleted > 0) {
+    resetGame()
+  }
+});
 
 
 minNumberInput.addEventListener("input", function(e) {
@@ -284,6 +292,7 @@ function nextLevel() {
 function resetGame() {
   console.log("======= RESET GAME =======");
   disableButton(resetButton);
+
   minNumber = 0;
   maxNumber = 100;
   guessCount = 0;
