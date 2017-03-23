@@ -26,6 +26,7 @@ minNumberInput.addEventListener("focus", resetGame)
 
 maxNumberInput.addEventListener("focus", resetGame)
 
+
 minNumberInput.addEventListener("input", function(e) {
   var input = parseInt(e.target.value);
   if (gamesCompleted > 0 || guessCount > 0) {
@@ -82,7 +83,7 @@ guessInput.addEventListener("input", function(e) {
   var inputString = e.target.value;
   var input = parseInt(e.target.value);
   removeAttentionInputs();
-  validateInput(input, inputString, e);
+  validateGuessInput(input, inputString, e);
 });
 
 guessInput.addEventListener("keyup", function(e) {
@@ -186,7 +187,7 @@ function calcGuessAverage(guesses) {
   console.log("Average Guess Amount = " + averageGuesses);
 }
 
-function validateInput(input, inputString, e) {
+function validateGuessInput(input, inputString, e) {
   if (e.inputType === "deleteContentBackward" && inputString === "") {
     disableButton(clearButton);
     disableButton(guessButton);
@@ -206,9 +207,9 @@ function validateInput(input, inputString, e) {
 }
 
 function compareNumbers() {
-  enableButton(resetButton);
   guessedNumber = parseInt(guessInput.value);
   if (guessButton.classList.value !== "disabled") {
+    enableButton(resetButton);
     console.log("======= GUESS SUBMISSION =======");
     guessCount++;
     updateMessageBefore("Your last guess of");
@@ -282,10 +283,6 @@ function nextLevel() {
 
 function resetGame() {
   console.log("======= RESET GAME =======");
-  // if (guessCount > 0) {
-  //   minNumber = 0;
-  //   maxNumber = 100;
-  // }
   disableButton(resetButton);
   minNumber = 0;
   maxNumber = 100;
@@ -299,7 +296,6 @@ function resetGame() {
   updateGuessedNumberDisplay("Level " + (gamesCompleted + 1));
   updateMessageAfter("clear");
   updateErrorMessage("");
-  focusElement(guessInput);
   guessedNumberDisplay.classList.remove("success");
   guessInput.removeAttribute("disabled", "");
   nextLevelButton.classList.remove("play-again");
