@@ -142,7 +142,7 @@ function disableButton(button) {
 }
 
 function updateNumberDisplay() {
-  guessedNumberDisplay.textContent = guessInput.value;
+  guessedNumberDisplay.textContent = parseInt(guessInput.value);
 }
 
 function updateMessageBefore(message) {
