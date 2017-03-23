@@ -23,12 +23,16 @@ resetGame();
 resetButton.addEventListener("click", resetGame);
 
 minNumberInput.addEventListener("focus", function() {
+  console.log("------------------");
+  console.log("Min or Max input focused");
   if (guessCount > 0 || gamesCompleted > 0) {
     resetGame()
   }
 });
 
 maxNumberInput.addEventListener("focus", function() {
+  console.log("------------------");
+  console.log("Min or Max input focused");
   if (guessCount > 0 || gamesCompleted > 0) {
     resetGame()
   }
