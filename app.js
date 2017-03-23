@@ -102,7 +102,9 @@ guessInput.addEventListener("keyup", function(e) {
   if (e.which === 13) {
     compareNumbers();
   } else if (e.which === 27) {
-    clearInput();
+    if (e.target.value !== "") {
+      clearInput();
+    }
   }
 });
 
