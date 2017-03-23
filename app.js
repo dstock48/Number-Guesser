@@ -18,9 +18,12 @@ var randomNumber,
   averageGuesses = 0,
   gamesCompleted = 0;
 
-resetGame();
+startGame();
 
-resetButton.addEventListener("click", resetGame);
+resetButton.addEventListener("click", function() {
+  resetGame();
+  focusElement(guessInput);
+});
 
 minNumberInput.addEventListener("input", function() {
   if (guessCount > 0 || gamesCompleted > 0) {
@@ -132,6 +135,11 @@ function clearInput() {
   updateErrorMessage("");
   focusElement(guessInput);
   console.log("========== ALL CLEAR! ==========");
+}
+
+function startGame() {
+  resetGame();
+  focusElement(guessInput);
 }
 
 function focusElement(el) {
