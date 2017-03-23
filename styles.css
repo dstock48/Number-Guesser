@@ -28,7 +28,7 @@ h1 {
   font-weight: 300; }
 
 .bold-color {
-  color: #29fa41;
+  color: #ED458B;
   font-weight: 700; }
 
 main {
@@ -55,7 +55,7 @@ main {
       main .inputs .minmax label {
         position: absolute;
         top: -38%;
-        color: #0fd105;
+        color: #EB008B;
         font-size: 1.2em;
         letter-spacing: 2px; }
     main .inputs .minmax-input-container {
@@ -63,7 +63,7 @@ main {
       width: 46%; }
     main .inputs #error-message {
       text-align: center;
-      color: #0fd105;
+      color: #EB008B;
       position: absolute;
       margin: 0;
       left: 50%;
@@ -92,7 +92,7 @@ main {
         -moz-appearance: textfield; }
       main .inputs input:focus {
         outline: none;
-        border: 3px solid #0fd105;
+        border: 3px solid #EB008B;
         color: #404041; }
   main .buttons {
     display: flex;
@@ -113,7 +113,7 @@ main {
     border: 3px solid transparent;
     transition: all 200ms; }
     main button:hover {
-      background-color: #0fd105;
+      background-color: #EB008B;
       cursor: pointer;
       outline: none; }
     main button:focus {
@@ -136,7 +136,7 @@ main {
     main .result #message-after {
       line-height: 1.5; }
     main .result #message-after span.bold-text {
-      color: #0fd105; }
+      color: #EB008B; }
     main .result #reset-btn:hover:not([disabled]) {
       background-color: red; }
     main .result p {
@@ -152,7 +152,7 @@ main {
 
 #guessed-number {
   font-size: 15em;
-  color: #0fd105;
+  color: #EB008B;
   font-weight: 300;
   font-family: 'Open Sans', sans-serif; }
   #guessed-number.success {
@@ -162,14 +162,14 @@ main {
   0% {
     background-color: #929497; }
   50% {
-    background-color: #0fd105; }
+    background-color: #EB008B; }
   100% {
     background-color: #929497; } }
 @keyframes pulse-text {
   0% {
     color: #000; }
   50% {
-    color: #0fd105; }
+    color: #EB008B; }
   100% {
     color: #000; } }
 @keyframes pulse-input {
@@ -177,8 +177,8 @@ main {
     box-shadow: 0px 0px 10px transparent;
     border-color: #D0D2D3; }
   50% {
-    box-shadow: 0px 0px 10px #0fd105;
-    border-color: #0fd105; }
+    box-shadow: 0px 0px 10px #EB008B;
+    border-color: #EB008B; }
   100% {
     box-shadow: 0px 0px 10px transparent;
     border-color: #D0D2D3; } }
