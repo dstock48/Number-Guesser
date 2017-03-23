@@ -22,17 +22,13 @@ resetGame();
 
 resetButton.addEventListener("click", resetGame);
 
-minNumberInput.addEventListener("focus", function() {
-  console.log("------------------");
-  console.log("Min or Max input focused");
+minNumberInput.addEventListener("input", function() {
   if (guessCount > 0 || gamesCompleted > 0) {
     resetGame()
   }
 });
 
-maxNumberInput.addEventListener("focus", function() {
-  console.log("------------------");
-  console.log("Min or Max input focused");
+maxNumberInput.addEventListener("input", function() {
   if (guessCount > 0 || gamesCompleted > 0) {
     resetGame()
   }
@@ -57,7 +53,7 @@ minNumberInput.addEventListener("input", function(e) {
       minNumber = input;
       getRandomNumber();
       console.log("----------------");
-      console.log("Random Number = " + randomNumber);
+      console.error("Random Number = " + randomNumber);
       console.log("Min = " + minNumber);
       console.log("Max = " + maxNumber);
     }
@@ -82,13 +78,24 @@ maxNumberInput.addEventListener("input", function(e) {
     } else {
       maxNumber = input;
       getRandomNumber();
-      console.log("----------------");
-      console.log("Random Number = " + randomNumber);
+      console.error("Random Number = " + randomNumber);
       console.log("Min = " + minNumber);
       console.log("Max = " + maxNumber);
     }
   }
   updateMessageBefore();
+});
+
+guessInput.addEventListener("focus", function(e) {
+  guessInput.classList.remove('ready');
+});
+
+guessInput.addEventListener("blur", function(e) {
+  if (e.target.value !== "") {
+    guessInput.classList.remove('ready');
+  } else {
+    guessInput.classList.add('ready');
+  }
 });
 
 guessInput.addEventListener("input", function(e) {
@@ -132,7 +139,7 @@ function focusElement(el) {
 }
 
 function enableButton(button) {
-  button.classList.remove('disabled');
+  button.classList.remove('disabled')
   button.removeAttribute("disabled", "");
 }
 
@@ -153,7 +160,7 @@ function updateMessageAfter(message) {
   if (message === "clear") {
     messageAfter.innerHTML = "&nbsp";
   } else {
-    messageAfter.textContent = message;
+    messageAfter.innerHTML = message;
   }
 }
 
@@ -197,25 +204,29 @@ function calcGuessAverage(guesses) {
   for(var i = 0; i < guessAmounts.length; i++) {
     total += guessAmounts[i];
   }
-  averageGuesses = total / guessAmounts.length;
-  console.log("Average Guess Amount = " + averageGuesses);
+  averageGuesses = (total / guessAmounts.length).toFixed(2);
+  console.info("Average Guess Amount = " + averageGuesses);
 }
 
 function validateGuessInput(input, inputString, e) {
   if (e.inputType === "deleteContentBackward" && inputString === "") {
     disableButton(clearButton);
     disableButton(guessButton);
+    guessButton.classList.remove("ready");
     updateErrorMessage("");
   } else if (isNaN(minNumber) || isNaN(maxNumber)) {
     disableButton(clearButton);
     disableButton(guessButton);
+    guessButton.classList.remove("ready");
   } else if (isNaN(input) || input > maxNumber || input < minNumber) {
     enableButton(clearButton);
     disableButton(guessButton);
+    guessButton.classList.remove("ready");
     updateErrorMessage("Warning: Invalid Input. Pick a number from " + minNumber + " to " + maxNumber + ".");
   } else {
     enableButton(clearButton);
     enableButton(guessButton);
+    guessButton.classList.add("ready");
     updateErrorMessage("");
   }
 }
@@ -230,23 +241,23 @@ function compareNumbers() {
     if (guessedNumber > randomNumber) {
       updateNumberDisplay();
       if (guessedNumber < randomNumber + 10) {
-        updateMessageAfter("was too high, but you're getting warm! Try again.");
+        updateMessageAfter("<span>was too high, but you're getting warm!</span><span class='bold-text'> Try again.</span>");
       } else {
-        updateMessageAfter("was too high. Try again.");
+        updateMessageAfter("<span>was too high.</span><span class='bold-text'> Try again.</span>");
       }
       focusElement(guessInput);
     } else if (guessedNumber < randomNumber) {
       updateNumberDisplay();
       if (guessedNumber > randomNumber - 10) {
-        updateMessageAfter("was too low, but you're getting warm! Try again.");
+        updateMessageAfter("<span>was too low, but you're getting warm!</span><span class='bold-text'> Try again.</span>");
       } else {
-        updateMessageAfter("was too low. Try again.");
+        updateMessageAfter("<span>was too low.</span><span class='bold-text'> Try again.</span>");
       }
       focusElement(guessInput);
     } else if (guessedNumber === randomNumber) {
       updateNumberDisplay();
       calcGuessAverage(guessCount);
-      console.log("SUCCESS!!!");
+      console.debug("SUCCESS!!!");
       console.log("Guess Count = " + guessCount);
       console.log("Amount of Guesses = " + guessAmounts);
       guessedNumberDisplay.classList.add("success");
@@ -263,12 +274,13 @@ function compareNumbers() {
       enableButton(nextLevelButton);
       focusElement(nextLevelButton);
     }
-    console.log("Guessed Number = " + guessedNumber);
-    console.log("Random Number = " + randomNumber);
     console.log("Guess Count = " + guessCount);
     console.log("Games Completed = " + gamesCompleted);
+    console.error("Random Number = " + randomNumber);
+    console.warn("Guessed Number = " + guessedNumber);
     disableButton(clearButton);
     disableButton(guessButton);
+    guessButton.classList.remove("ready");
     guessInput.value = "";
   }
 }
@@ -287,7 +299,7 @@ function nextLevel() {
   guessedNumberDisplay.classList.remove("success");
   guessInput.removeAttribute("disabled", "");
   nextLevelButton.classList.remove("play-again");
-  console.log("Random Number = " + randomNumber);
+  console.error("Random Number = " + randomNumber);
   console.log("Guess Count = " + guessCount);
   console.log("Guess Completed = " + gamesCompleted);
   console.log("Min = " + minNumber);
@@ -314,7 +326,7 @@ function resetGame() {
   guessedNumberDisplay.classList.remove("success");
   guessInput.removeAttribute("disabled", "");
   nextLevelButton.classList.remove("play-again");
-  console.log("Random Number = " + randomNumber);
+  console.error("Random Number = " + randomNumber);
   console.log("Guess Count = " + guessCount);
   console.log("Amount of Guesses = " + guessAmounts);
   console.log("Guess Completed = " + gamesCompleted);

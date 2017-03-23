@@ -1,5 +1,7 @@
-$header-pink: #ED458B;
-$pink: #EB008B;
+// Turing Blue = #05C2D1
+
+$primary: #0fd105; // <=== Change only this color
+$secondary: lighten(adjust-hue( $primary, 10% ), 15%);
 $light-grey: #D0D2D3;
 $mid-grey: #929497;
 $dark-grey: #404041;
@@ -13,6 +15,14 @@ $off-white: #E6E7E8;
 
 body {
   padding-bottom: 30px;
+}
+
+input#guess-input.ready {
+    animation: pulse-input 1s ease-in-out infinite;
+}
+
+input#guess-input.error {
+    border-color: red;
 }
 
 header {
@@ -34,8 +44,8 @@ h1 {
   font-weight: 300;
 }
 
-.pink {
-  color: $header-pink;
+.bold-color {
+  color: $secondary;
   font-weight: 700;
 }
 
@@ -68,7 +78,7 @@ main {
       label {
         position: absolute;
         top: -38%;
-        color: $pink;
+        color: $primary;
         font-size: 1.2em;
         letter-spacing: 2px;
       }
@@ -81,7 +91,7 @@ main {
 
     #error-message {
       text-align: center;
-      color: $pink;
+      color: $primary;
       position: absolute;
       margin: 0;
       left: 50%;
@@ -127,7 +137,7 @@ main {
 
       &:focus {
         outline: none;
-        border: 3px solid $pink;
+        border: 3px solid $primary;
         color: $dark-grey;
       }
     }
@@ -155,7 +165,7 @@ main {
     transition: all 200ms;
 
     &:hover {
-      background-color: $pink;
+      background-color: $primary;
       cursor: pointer;
       outline: none;
     }
@@ -163,7 +173,7 @@ main {
     &:focus {
       outline: none;
 
-      // border: 3px solid $pink;
+      // border: 3px solid $primary;
 
     }
 
@@ -171,12 +181,10 @@ main {
       transform: translateY(2px);
     }
 
-    &.play-again {
-      animation: pulse 1.5s infinite;
+    &.play-again,
+    &.ready {
+      animation: pulse 1s infinite;
       animation-fill-mode: backwards;
-
-      // animation-iteration-count: 5;
-
     }
 
     &.disabled {
@@ -197,12 +205,17 @@ main {
     text-align: center;
     color: $dark-grey;
 
-    #message-before.attention {
-      animation: pulse-text 1s ease-in-out 3;
-    }
-
     #message-after {
       line-height: 1.5;
+    }
+
+    #message-after span.bold-text {
+      // font-weight: bold;
+      color: $primary;
+    }
+
+    #reset-btn:hover:not([disabled]) {
+      background-color: red;
     }
 
     p {
@@ -225,7 +238,7 @@ main {
 
 #guessed-number {
   font-size: 15em;
-  color: $pink;
+  color: $primary;
   font-weight: 300;
   font-family: 'Open Sans', sans-serif;
 
@@ -240,7 +253,7 @@ main {
   }
 
   50% {
-    background-color: $pink;
+    background-color: $primary;
   }
 
   100% {
@@ -254,7 +267,7 @@ main {
   }
 
   50% {
-    color: $pink;
+    color: $primary;
   }
 
   100% {
@@ -269,8 +282,8 @@ main {
   }
 
   50% {
-    box-shadow: 0px 0px 10px $pink;
-    border-color: $pink;
+    box-shadow: 0px 0px 10px $primary;
+    border-color: $primary;
   }
 
   100% {
