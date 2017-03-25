@@ -1,3 +1,7 @@
+/*=======================================
+>>>>>>>>  VARIABLES  <<<<<<<<
+========================================*/
+
 $primary: #EB008B;
 $secondary: #ED458B;
 $light-grey: #D0D2D3;
@@ -6,31 +10,38 @@ $dark-grey: #404041;
 $white: #fff;
 $off-white: #E6E7E8;
 
+/*=======================================
+>>>>>>>>  GENERAL STYLES  <<<<<<<<
+========================================*/
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  padding-bottom: 30px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
 }
 
-input#guess-input.ready {
-    animation: pulse-input 1s ease-in-out infinite;
+main {
+  max-width: 1000px;
+  padding: 0 20px;
+  margin: auto;
 }
 
-input#guess-input.error {
-    border-color: red;
-}
+/*=======================================
+>>>>>>>>  HEADER  <<<<<<<<
+========================================*/
 
 header {
   font-family: 'Open Sans', sans-serif;
-  height: 135px;
+  height: 125px;
   background-color: $dark-grey;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 50px;
 }
 
 h1 {
@@ -47,203 +58,187 @@ h1 {
   font-weight: 700;
 }
 
-main {
-  font-family: 'Open Sans', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1000px;
-  padding: 50px 20px 0px;
-  margin: auto;
+/*=======================================
+>>>>>>>>  INPUTS  <<<<<<<<
+========================================*/
+
+.input {
+  margin-bottom: 80px;
+}
+
+input {
+  font-size: 2.2em;
   font-weight: 300;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.5;
+  color: $dark-grey;
+  padding: 2px 10px;
+  border: 3px solid $light-grey;
+  margin-bottom: 50px;
+  transition: all 200ms;
+  width: 100%;
 
-  .inputs {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-between;
-
-    .minmax {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 50px;
-
-      input.attention {
-        animation: pulse-input 1s ease-in-out 2;
-      }
-
-      label {
-        position: absolute;
-        top: -38%;
-        color: $primary;
-        font-size: 1.2em;
-        letter-spacing: 2px;
-      }
-    }
-
-    .minmax-input-container {
-      position: relative;
-      width: 46%;
-    }
-
-    #error-message {
-      text-align: center;
-      color: $primary;
-      position: absolute;
-      margin: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 45%;
-      font-size: 1.2em;
-      font-weight: bold;
-      width: 100%;
-    }
-
-    input {
-      display: block;
-      // margin: 60px 0 0;
-      font-size: 2.2em;
-      font-family: 'Open Sans', sans-serif;
-      padding: 2px 10px;
-      color: $dark-grey;
-      border: 3px solid $light-grey;
-      width: 100%;
-      font-weight: 300;
-      line-height: 1.5;
-      transition: all 200ms;
-
-      &#min-number,
-      &#max-number {
-        // width: 45%;
-
-      }
-
-      &::placeholder {
-        color: $light-grey;
-      }
-
-      &[type="number"]::-webkit-outer-spin-button,
-      &[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
-      &[type="number"] {
-        -moz-appearance: textfield;
-      }
-
-      &:focus {
-        outline: none;
-        border: 3px solid $primary;
-        color: $dark-grey;
-      }
-    }
+  &.input-pulse {
+    animation: pulse-input 1s ease-in-out infinite;
   }
 
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: 50px auto 80px;
+  &:focus {
+    color: $dark-grey;
+    border: 3px solid $primary;
+    outline: none;
   }
 
-  button {
-    font-family: 'Open Sans', sans-serif;
-    display: block;
-    border-radius: 30px;
-    width: 45%;
-    border: none;
-    color: $white;
-    padding: 8px 0px 10px;
-    font-size: 2em;
-    background-color: $mid-grey;
-    font-weight: 300;
-    border: 3px solid transparent;
-    transition: all 200ms;
+  &::placeholder {
+    color: $light-grey;
+  }
+}
+
+.minmax-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.attention {
+  animation: pulse-input 1s ease-in-out 2;
+}
+
+.minmax-input-container {
+  position: relative;
+  width: 46%;
+
+  label { // <- Is this nesting OK?
+    position: absolute;
+    top: -20%;
+    color: $primary;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+  }
+}
+
+/*=======================================
+>>>>>>>>  BUTTONS  <<<<<<<<
+========================================*/
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+button {
+  font-family: 'Open Sans', sans-serif;
+  display: block;
+  border-radius: 30px;
+  width: 45%;
+  border: none;
+  color: $white;
+  padding: 8px 0px 10px;
+  font-size: 2em;
+  background-color: $mid-grey;
+  font-weight: 300;
+  border: 3px solid transparent;
+  transition: all 200ms;
+
+// Is this nesting OK?
+  &:hover {
+    background-color: $primary;
+    cursor: pointer;
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  &.button-pulse {
+    animation: pulse 1s infinite;
+    animation-fill-mode: backwards;
+  }
+
+  &.disabled {
+    background-color: $light-grey;
 
     &:hover {
-      background-color: $primary;
-      cursor: pointer;
-      outline: none;
-    }
-
-    &:focus {
-      outline: none;
-
-      // border: 3px solid $primary;
-
+      cursor: not-allowed;
     }
 
     &:active {
-      transform: translateY(2px);
-    }
-
-    &.play-again,
-    &.ready {
-      animation: pulse 1s infinite;
-      animation-fill-mode: backwards;
-    }
-
-    &.disabled {
-      background-color: $light-grey;
-
-      &:hover {
-        cursor: not-allowed;
-      }
-
-      &:active {
-        transform: none;
-      }
-    }
-  }
-
-  .result {
-    width: 100%;
-    text-align: center;
-    color: $dark-grey;
-
-    #message-after {
-      line-height: 1.5;
-    }
-
-    #message-after span.bold-text {
-      // font-weight: bold;
-      color: $primary;
-    }
-
-    #reset-btn:hover:not([disabled]) {
-      background-color: red;
-    }
-
-    p {
-      margin: 0px;
-      font-size: 2em;
-    }
-
-    button {
-      &:first-child {
-        margin-top: 80px;
-      }
-
-      display: inline;
-      width: 100%;
-      font-size: 1.5em;
-      margin-top: 1em;
+      transform: none;
     }
   }
 }
 
+#error-message {
+  text-align: center;
+  color: $primary;
+  position: absolute;
+  margin: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 21.7%;
+  font-size: 1.2em;
+  font-weight: bold;
+  width: 100%;
+}
+
+/*=======================================
+>>>>>>>>  RESULT SECTION  <<<<<<<<
+========================================*/
+
+.result {
+  width: 100%;
+  text-align: center;
+  color: $dark-grey;
+  margin-bottom: 1em;
+
+  button { // <- Is this nesting OK?
+    width: 100%;
+    font-size: 1.5em;
+    margin-top: 1em;
+  }
+}
+
+h2 {
+  font-weight: 300;
+}
+
+h3 {
+  margin: 0px;
+  font-size: 2em;
+  font-weight: 300;
+}
+
+#message-after {
+  line-height: 1.5;
+}
+
+#message-after span.bold-text {
+  color: $primary;
+}
+
+#reset-btn:hover:not([disabled]) {
+  background-color: #5900ff;
+}
+
 #guessed-number {
-  font-size: 15em;
+  font-size: 13em;
   color: $primary;
   font-weight: 300;
   font-family: 'Open Sans', sans-serif;
+  margin: 60px auto;
 
   &.success {
     font-weight: bold;
   }
 }
+
+/*=======================================
+>>>>>>>>  ANIMATION KEYFRAMES  <<<<<<<<
+========================================*/
 
 @keyframes pulse {
   0% {
@@ -290,23 +285,23 @@ main {
   }
 }
 
-@media screen and (max-width: 600px) {
-  body {
-    font-size: 0.8em;
-  }
-
-  h1 {
-    // font-size: 4.3em;
-  }
-
-  #guessed-number {
-    font-size: 9em;
-  }
-}
+/*=======================================
+>>>>>>>>  MEDIA QUERIES  <<<<<<<<
+========================================*/
 
 @media (max-width: 800px) {
   #guessed-number {
     font-size: 10em;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 10px;
+  }
+
+  #guessed-number {
+    font-size: 9em;
   }
 }
 
@@ -315,7 +310,7 @@ main {
     font-size: 3.6em;
   }
 
-  main .inputs #error-message {
+  #error-message {
     font-size: 1em;
   }
 

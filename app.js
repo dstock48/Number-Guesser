@@ -90,20 +90,21 @@ maxNumberInput.addEventListener("input", function(e) {
 });
 
 guessInput.addEventListener("focus", function(e) {
-  guessInput.classList.remove('ready');
+  guessInput.classList.remove('input-pulse');
 });
 
 guessInput.addEventListener("blur", function(e) {
   if (e.target.value !== "") {
-    guessInput.classList.remove('ready');
+    guessInput.classList.remove('input-pulse');
   } else {
-    guessInput.classList.add('ready');
+    guessInput.classList.add('input-pulse');
   }
 });
 
 guessInput.addEventListener("input", function(e) {
   var inputString = e.target.value;
   var input = parseInt(e.target.value);
+  guessInput.classList.remove('input-pulse');
   removeAttentionInputs();
   validateGuessInput(input, inputString, e);
 });
@@ -198,11 +199,11 @@ function updateErrorMessage(message) {
 
 function makeGameHarder() {
   if (gamesCompleted > 4) {
-  maxNumber += 20;
-  minNumber -= 20;
+    maxNumber += 20;
+    minNumber -= 20;
   } else {
-  maxNumber += 10;
-  minNumber -= 10;
+    maxNumber += 10;
+    minNumber -= 10;
   }
 }
 
@@ -220,21 +221,21 @@ function validateGuessInput(input, inputString, e) {
   if (e.inputType === "deleteContentBackward" && inputString === "") {
     disableButton(clearButton);
     disableButton(guessButton);
-    guessButton.classList.remove("ready");
+    guessButton.classList.remove("button-pulse");
     updateErrorMessage("");
   } else if (isNaN(minNumber) || isNaN(maxNumber)) {
     disableButton(clearButton);
     disableButton(guessButton);
-    guessButton.classList.remove("ready");
+    guessButton.classList.remove("button-pulse");
   } else if (isNaN(input) || input > maxNumber || input < minNumber) {
     enableButton(clearButton);
     disableButton(guessButton);
-    guessButton.classList.remove("ready");
+    guessButton.classList.remove("button-pulse");
     updateErrorMessage("Warning: Invalid Input. Pick a number from " + minNumber + " to " + maxNumber + ".");
   } else {
     enableButton(clearButton);
     enableButton(guessButton);
-    guessButton.classList.add("ready");
+    guessButton.classList.add("button-pulse");
     updateErrorMessage("");
   }
 }
@@ -277,7 +278,7 @@ function compareNumbers() {
         updateMessageBefore("Wow, you got it on your first try!");
         updateMessageAfter("Are you sure you're not cheating?");
       }
-      nextLevelButton.classList.add("play-again");
+      nextLevelButton.classList.add("button-pulse");
       gamesCompleted++;
       enableButton(nextLevelButton);
       focusElement(nextLevelButton);
@@ -288,7 +289,7 @@ function compareNumbers() {
     console.warn("Guessed Number = " + guessedNumber);
     disableButton(clearButton);
     disableButton(guessButton);
-    guessButton.classList.remove("ready");
+    guessButton.classList.remove("button-pulse");
     guessInput.value = "";
   }
 }
@@ -306,7 +307,7 @@ function nextLevel() {
   updateErrorMessage("");
   guessedNumberDisplay.classList.remove("success");
   guessInput.removeAttribute("disabled", "");
-  nextLevelButton.classList.remove("play-again");
+  nextLevelButton.classList.remove("button-pulse");
   console.error("Random Number = " + randomNumber);
   console.log("Guess Count = " + guessCount);
   console.log("Guess Completed = " + gamesCompleted);
@@ -333,7 +334,7 @@ function resetGame() {
   updateErrorMessage("");
   guessedNumberDisplay.classList.remove("success");
   guessInput.removeAttribute("disabled", "");
-  nextLevelButton.classList.remove("play-again");
+  nextLevelButton.classList.remove("button-pulse");
   console.error("Random Number = " + randomNumber);
   console.log("Guess Count = " + guessCount);
   console.log("Amount of Guesses = " + guessAmounts);

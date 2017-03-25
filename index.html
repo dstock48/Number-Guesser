@@ -15,32 +15,31 @@
   </head>
   <body>
     <header>
-      <h1>
-        <span class="bold-color">Number</span>Guesser</h1>
+      <h1><span class="bold-color">Number</span>Guesser</h1>
     </header>
     <main>
-      <div class="inputs">
-        <div class="minmax">
+      <section class="input">
+        <div class="minmax-inputs">
           <div class="minmax-input-container">
             <label for="min-number">Minimum</label>
-            <input id="min-number" type="text" name="number" value="" placeholder="Min">
+            <input id="min-number" type="text" name="minimum" value="" placeholder="Min">
           </div>
           <div class="minmax-input-container">
             <label for="max-number">Maximum</label>
-            <input id="max-number" type="text" name="number" value="" placeholder="Max">
+            <input id="max-number" type="text" name="maximum" value="" placeholder="Max">
           </div>
         </div>
-        <input id="guess-input" class="ready" type="text" name="number" value="" placeholder="Enter your guess">
         <p id="error-message"></p>
-      </div>
-      <div class="buttons">
-        <button class="disabled" type="submit" name="guess" id="guess-btn" disabled>Guess</button>
-        <button class="disabled" type="button" name="clear" id="clear-btn" disabled>Clear</button>
-      </div>
+        <input id="guess-input" class="ready" type="text" name="number" value="" placeholder="Enter your guess">
+        <div class="buttons">
+          <button class="disabled" type="submit" name="guess" id="guess-btn" disabled>Guess</button>
+          <button class="disabled" type="button" name="clear" id="clear-btn" disabled>Clear</button>
+        </div>
+      </section>
       <section class="result">
-        <p id="message-before"></p>
-        <p id="guessed-number"></p>
-        <p id="message-after"></p>
+        <h3 id="message-before"></h3>
+        <h2 id="guessed-number"></h2>
+        <h3 id="message-after"></h3>
         <button type="button" class="btn-bottom" name="clear" id="next-level-btn">Next Level</button>
         <button type="button" class="btn-bottom" name="clear" id="reset-btn">Reset</button>
       </section>

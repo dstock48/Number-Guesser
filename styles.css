@@ -1,23 +1,33 @@
+/*=======================================
+>>>>>>>>  VARIABLES  <<<<<<<<
+========================================*/
+/*=======================================
+>>>>>>>>  GENERAL STYLES  <<<<<<<<
+========================================*/
 * {
   box-sizing: border-box; }
 
 body {
-  padding-bottom: 30px; }
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300; }
 
-input#guess-input.ready {
-  animation: pulse-input 1s ease-in-out infinite; }
+main {
+  max-width: 1000px;
+  padding: 0 20px;
+  margin: auto; }
 
-input#guess-input.error {
-  border-color: red; }
-
+/*=======================================
+>>>>>>>>  HEADER  <<<<<<<<
+========================================*/
 header {
   font-family: 'Open Sans', sans-serif;
-  height: 135px;
+  height: 125px;
   background-color: #404041;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 50px; }
 
 h1 {
   margin: 0;
@@ -31,133 +41,142 @@ h1 {
   color: #ED458B;
   font-weight: 700; }
 
-main {
+/*=======================================
+>>>>>>>>  INPUTS  <<<<<<<<
+========================================*/
+.input {
+  margin-bottom: 80px; }
+
+input {
+  font-size: 2.2em;
+  font-weight: 300;
   font-family: 'Open Sans', sans-serif;
+  line-height: 1.5;
+  color: #404041;
+  padding: 2px 10px;
+  border: 3px solid #D0D2D3;
+  margin-bottom: 50px;
+  transition: all 200ms;
+  width: 100%; }
+  input.input-pulse {
+    animation: pulse-input 1s ease-in-out infinite; }
+  input:focus {
+    color: #404041;
+    border: 3px solid #EB008B;
+    outline: none; }
+  input::placeholder {
+    color: #D0D2D3; }
+
+.minmax-inputs {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1000px;
-  padding: 50px 20px 0px;
-  margin: auto;
+  justify-content: space-between; }
+
+.attention {
+  animation: pulse-input 1s ease-in-out 2; }
+
+.minmax-input-container {
+  position: relative;
+  width: 46%; }
+  .minmax-input-container label {
+    position: absolute;
+    top: -20%;
+    color: #EB008B;
+    font-size: 1.2em;
+    letter-spacing: 2px; }
+
+/*=======================================
+>>>>>>>>  BUTTONS  <<<<<<<<
+========================================*/
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; }
+
+button {
+  font-family: 'Open Sans', sans-serif;
+  display: block;
+  border-radius: 30px;
+  width: 45%;
+  border: none;
+  color: #fff;
+  padding: 8px 0px 10px;
+  font-size: 2em;
+  background-color: #929497;
+  font-weight: 300;
+  border: 3px solid transparent;
+  transition: all 200ms; }
+  button:hover {
+    background-color: #EB008B;
+    cursor: pointer;
+    outline: none; }
+  button:focus {
+    outline: none; }
+  button:active {
+    transform: translateY(2px); }
+  button.button-pulse {
+    animation: pulse 1s infinite;
+    animation-fill-mode: backwards; }
+  button.disabled {
+    background-color: #D0D2D3; }
+    button.disabled:hover {
+      cursor: not-allowed; }
+    button.disabled:active {
+      transform: none; }
+
+#error-message {
+  text-align: center;
+  color: #EB008B;
+  position: absolute;
+  margin: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 21.7%;
+  font-size: 1.2em;
+  font-weight: bold;
+  width: 100%; }
+
+/*=======================================
+>>>>>>>>  RESULT SECTION  <<<<<<<<
+========================================*/
+.result {
+  width: 100%;
+  text-align: center;
+  color: #404041;
+  margin-bottom: 1em; }
+  .result button {
+    width: 100%;
+    font-size: 1.5em;
+    margin-top: 1em; }
+
+h2 {
   font-weight: 300; }
-  main .inputs {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-between; }
-    main .inputs .minmax {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 50px; }
-      main .inputs .minmax input.attention {
-        animation: pulse-input 1s ease-in-out 2; }
-      main .inputs .minmax label {
-        position: absolute;
-        top: -38%;
-        color: #EB008B;
-        font-size: 1.2em;
-        letter-spacing: 2px; }
-    main .inputs .minmax-input-container {
-      position: relative;
-      width: 46%; }
-    main .inputs #error-message {
-      text-align: center;
-      color: #EB008B;
-      position: absolute;
-      margin: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 45%;
-      font-size: 1.2em;
-      font-weight: bold;
-      width: 100%; }
-    main .inputs input {
-      display: block;
-      font-size: 2.2em;
-      font-family: 'Open Sans', sans-serif;
-      padding: 2px 10px;
-      color: #404041;
-      border: 3px solid #D0D2D3;
-      width: 100%;
-      font-weight: 300;
-      line-height: 1.5;
-      transition: all 200ms; }
-      main .inputs input::placeholder {
-        color: #D0D2D3; }
-      main .inputs input[type="number"]::-webkit-outer-spin-button, main .inputs input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0; }
-      main .inputs input[type="number"] {
-        -moz-appearance: textfield; }
-      main .inputs input:focus {
-        outline: none;
-        border: 3px solid #EB008B;
-        color: #404041; }
-  main .buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: 50px auto 80px; }
-  main button {
-    font-family: 'Open Sans', sans-serif;
-    display: block;
-    border-radius: 30px;
-    width: 45%;
-    border: none;
-    color: #fff;
-    padding: 8px 0px 10px;
-    font-size: 2em;
-    background-color: #929497;
-    font-weight: 300;
-    border: 3px solid transparent;
-    transition: all 200ms; }
-    main button:hover {
-      background-color: #EB008B;
-      cursor: pointer;
-      outline: none; }
-    main button:focus {
-      outline: none; }
-    main button:active {
-      transform: translateY(2px); }
-    main button.play-again, main button.ready {
-      animation: pulse 1s infinite;
-      animation-fill-mode: backwards; }
-    main button.disabled {
-      background-color: #D0D2D3; }
-      main button.disabled:hover {
-        cursor: not-allowed; }
-      main button.disabled:active {
-        transform: none; }
-  main .result {
-    width: 100%;
-    text-align: center;
-    color: #404041; }
-    main .result #message-after {
-      line-height: 1.5; }
-    main .result #message-after span.bold-text {
-      color: #EB008B; }
-    main .result #reset-btn:hover:not([disabled]) {
-      background-color: red; }
-    main .result p {
-      margin: 0px;
-      font-size: 2em; }
-    main .result button {
-      display: inline;
-      width: 100%;
-      font-size: 1.5em;
-      margin-top: 1em; }
-      main .result button:first-child {
-        margin-top: 80px; }
+
+h3 {
+  margin: 0px;
+  font-size: 2em;
+  font-weight: 300; }
+
+#message-after {
+  line-height: 1.5; }
+
+#message-after span.bold-text {
+  color: #EB008B; }
+
+#reset-btn:hover:not([disabled]) {
+  background-color: #5900ff; }
 
 #guessed-number {
-  font-size: 15em;
+  font-size: 13em;
   color: #EB008B;
   font-weight: 300;
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+  margin: 60px auto; }
   #guessed-number.success {
     font-weight: bold; }
 
+/*=======================================
+>>>>>>>>  ANIMATION KEYFRAMES  <<<<<<<<
+========================================*/
 @keyframes pulse {
   0% {
     background-color: #929497; }
@@ -182,20 +201,23 @@ main {
   100% {
     box-shadow: 0px 0px 10px transparent;
     border-color: #D0D2D3; } }
-@media screen and (max-width: 600px) {
-  body {
-    font-size: 0.8em; }
-
-  #guessed-number {
-    font-size: 9em; } }
+/*=======================================
+>>>>>>>>  MEDIA QUERIES  <<<<<<<<
+========================================*/
 @media (max-width: 800px) {
   #guessed-number {
     font-size: 10em; } }
+@media (max-width: 600px) {
+  body {
+    font-size: 10px; }
+
+  #guessed-number {
+    font-size: 9em; } }
 @media (max-width: 485px) {
   h1 {
     font-size: 3.6em; }
 
-  main .inputs #error-message {
+  #error-message {
     font-size: 1em; }
 
   #guessed-number {
