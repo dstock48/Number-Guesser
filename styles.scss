@@ -3,7 +3,7 @@
 ========================================*/
 
 $primary: #EB008B;
-$secondary: #ED458B;
+$secondary: lighten(adjust-hue($primary, 5%), 10%);
 $light-grey: #D0D2D3;
 $mid-grey: #929497;
 $dark-grey: #404041;
@@ -53,7 +53,7 @@ h1 {
   font-weight: 300;
 }
 
-.bold-color {
+.accent {
   color: $secondary;
   font-weight: 700;
 }
