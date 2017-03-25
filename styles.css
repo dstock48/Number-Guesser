@@ -45,8 +45,7 @@ h1 {
 >>>>>>>>  INPUTS  <<<<<<<<
 ========================================*/
 .input {
-  position: relative;
-  margin-bottom: 80px; }
+  position: relative; }
 
 input {
   font-size: 2.2em;
@@ -149,19 +148,18 @@ button {
     font-size: 1.5em;
     margin-top: 1em; }
 
-h2 {
-  font-weight: 300; }
-
 h3 {
   margin: 0px;
   font-size: 2em;
   font-weight: 300; }
 
-#message-after {
-  line-height: 1.5; }
+#message-before {
+  margin-top: 80px; }
 
-#message-after span.bold-text {
-  color: #EB008B; }
+#message-after {
+  margin-bottom: 80px; }
+  #message-after span.bold-text {
+    color: #EB008B; }
 
 #reset-btn:hover:not([disabled]) {
   background-color: #4900eb; }
@@ -171,7 +169,7 @@ h3 {
   color: #EB008B;
   font-weight: 300;
   font-family: 'Open Sans', sans-serif;
-  margin: 60px auto; }
+  margin: 20px auto; }
   #guessed-number.success {
     font-weight: bold; }
 

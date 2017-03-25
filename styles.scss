@@ -64,7 +64,6 @@ h1 {
 
 .input {
   position: relative;
-  margin-bottom: 80px;
 }
 
 input {
@@ -203,22 +202,22 @@ button {
   }
 }
 
-h2 {
-  font-weight: 300;
-}
-
 h3 {
   margin: 0px;
   font-size: 2em;
   font-weight: 300;
 }
 
-#message-after {
-  line-height: 1.5;
+#message-before {
+  margin-top: 80px;
 }
 
-#message-after span.bold-text {
-  color: $primary;
+#message-after {
+  margin-bottom: 80px;
+
+  span.bold-text {
+    color: $primary;
+  }
 }
 
 #reset-btn:hover:not([disabled]) {
@@ -231,7 +230,7 @@ h3 {
   color: $primary;
   font-weight: 300;
   font-family: 'Open Sans', sans-serif;
-  margin: 60px auto;
+  margin: 20px auto;
 
   &.success {
     font-weight: bold;
