@@ -21,6 +21,7 @@ $off-white: #E6E7E8;
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+  font-size: 12px;
 }
 
 main {
@@ -269,18 +270,15 @@ h3 {
 }
 
 @keyframes pulse-input {
-  0% {
-    box-shadow: 0px 0px 10px transparent;
-    border-color: $light-grey;
-  }
+  // 0% {
+  //   border-color: $light-grey;
+  // }
 
   50% {
-    box-shadow: 0px 0px 10px $primary;
     border-color: $primary;
   }
 
   100% {
-    box-shadow: 0px 0px 10px transparent;
     border-color: $light-grey;
   }
 }
@@ -312,6 +310,18 @@ h3 {
 
   h1 {
     font-size: 3.6em;
+  }
+
+  .buttons {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+
+      &:nth-child(2) {
+        margin-top: .5em;
+      }
+    }
   }
 
   #guessed-number {
