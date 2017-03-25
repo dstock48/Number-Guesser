@@ -45,6 +45,7 @@ h1 {
 >>>>>>>>  INPUTS  <<<<<<<<
 ========================================*/
 .input {
+  position: relative;
   margin-bottom: 80px; }
 
 input {
@@ -130,7 +131,7 @@ button {
   margin: 0;
   left: 50%;
   transform: translateX(-50%);
-  top: 21.7%;
+  top: 27%;
   font-size: 1.2em;
   font-weight: bold;
   width: 100%; }
